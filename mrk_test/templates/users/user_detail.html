@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  User: 
+  
+    {{ object.username }}
+  
+  
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        {% if object.party_id %}
+          <h2>
+              <p>Part ID: {{ object.party_id }}</p>
+              <p>Mobile Number: {{ object.username }}</p>
+          </h2>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+              <p><strong>Warning:</strong> Update your profile for complete Registration</p>
+              <p>Mobile Number: {{ object.username }}</p>
+            </div>
+        {% endif %}
+        {% if object.is_verified %}
+          <div class="alert alert-success" role="alert">
+            <p>Your account is verified from admin</p>
+          </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+              <p><strong>Warning:</strong> Your account is not verified yet from admin</p>
+            </div>
+        {% endif %}
+        <p>Name of User: <b>{{ object.name }}</b></p>
+        <p>Father's Name: <b>{{ object.father_name }}</b></p>
+        <p>Mother's Name: <b>{{ object.mother_name }}</b></p>
+        <p>District: <b>{{ object.district_name }}</b></p>
+    </div>
+  </div>
+  {% if object == request.user %}
+    <!-- Action buttons -->
+    <div class="row">
+      <div class="col-sm-12">
+        <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">View My Info</a>
+        <!-- <a class="btn btn-primary"
+           href="{% url 'account_email' %}"
+           role="button">E-Mail</a>
+        <!-- Your Stuff: Custom user template urls -->
+      </div>
+    </div>
+    <!-- End Action buttons -->
+  {% endif %}
+</div>
+{% endblock content %}
